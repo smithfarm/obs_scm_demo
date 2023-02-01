@@ -34,7 +34,7 @@ All you ever wanted to know about OBS_SCM, but were afraid to ask.
 
 %install
 install -D -m 0755 obs_scm_demo %{buildroot}%{_bindir}/obs_scm_demo
-install -m 0644 README.md %{buildroot}%{_datadir}/%{name}/README.md
+install -D -m 0644 README.md %{buildroot}%{_datadir}/%{name}/README.md
 
 %files
 %license LICENSE
