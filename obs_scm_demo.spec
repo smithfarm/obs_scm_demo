@@ -38,6 +38,7 @@ install -D -m 0644 README.md %{buildroot}%{_datadir}/%{name}/README.md
 
 %files
 %license LICENSE
+%dir %{_datadir}/%{name}
 %doc %{_datadir}/%{name}/README.md
 %{_bindir}/obs_scm_demo
 
