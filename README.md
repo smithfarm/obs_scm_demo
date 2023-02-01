@@ -25,19 +25,15 @@ OK, let's get started.
 
 ## Review the documentation
 
-First, review the OBS_SCM documentation. Just to be aware of it.
+Review the OBS source service documentation. Study the whole chapter closely.
 
-    https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.scm_ci_workflow_integration.html
-
-Second, review the OBS source service documentation. Just to be aware of it.
-
-    https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html
+[Using Source Services chapter of OBS User Guide](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html)
 
 ## Create an empty git repo
 
-Using the github web GUI, create an empty github repo
+Using the github web GUI, create an empty github repo.
 
-    https://github.com/smithfarm/obs_scm_demo
+[URL of your empty github repo](https://github.com/smithfarm/obs_scm_demo)
 
 ## Create a corresponding empty OBS package
 
@@ -54,8 +50,6 @@ Observe that a new empty package does get created on the server
 Still in the local directory home:smithfarm/obs_scm_demo, note that the
 directory is empty. In other words, we are starting from an empty package: we
 are bootstrapping.
-
-    ls
 
 ## Add the github repo to the OBS package (locally)
 
