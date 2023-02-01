@@ -10,8 +10,10 @@ OBS stands for the Open Build Service.
 
 SCM stands for Source Code Management
 
-OBS_SCM is a feature of the OBS that causes it to be integrated with an SCM
-service, such as github.
+OBS_SCM is a feature using which we use the OBS in conjunction with a Source
+Code Management service, such as github. The idea is to maintain everything
+(well, almost everything) that OBS needs to build our software in git, and
+not have to worry too much about getting source code changes built in OBS.
  
 ## What will we do?
 
