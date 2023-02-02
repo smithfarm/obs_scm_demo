@@ -584,7 +584,7 @@ end of your builds.
 Commit and push:
 
     git commit -am"Release version 0.0.1"
-    git push
+    git push origin --tags
 
 Look at the "Recent Deliveries" tab in your github repo (Settings -> Webhooks
 -> Edit -> Recent Deliveries). You should see a new delivery with a green

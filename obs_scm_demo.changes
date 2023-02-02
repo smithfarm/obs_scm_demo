@@ -1,13 +1,19 @@
 -------------------------------------------------------------------
+Thu Feb  2 13:58:45 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.3
+
+- Release version 0.0.3: 
+  + README.md: push tags along with commits when pushing
+
+-------------------------------------------------------------------
 Thu Feb  2 13:46:28 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.2
 
-- Update to version 0.0.2:
+- Release version 0.0.2:
   + README.md: add lots of verbiage about version numbers
 
 -------------------------------------------------------------------
 Thu Feb  2 12:04:45 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.1
 
-- Update to version 0.0.1:
+- Release version 0.0.1:
   + first release
 
 -------------------------------------------------------------------
