@@ -146,6 +146,7 @@ Next, still in the git clone directory, create a file called
     Version:        0
     Release:        0
     License:        BSD-3-Clause
+    Group:          Documentation/Howto
     URL:            https://github.com/smithfarm/obs_scm_demo
     Source0:        _service
     BuildArch:      noarch
