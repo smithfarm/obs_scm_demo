@@ -75,35 +75,35 @@ Add the github repo
 
     oosc add https://github.com/smithfarm/obs_scm_demo.git
 
-Observe that a _service file has been created
+Observe that a `_service` file has been created
 
     oosc status
     ls
     cat _service
 
-While we will need a _service file, this auto-generated one is not appropriate.
+While we will need a `_service` file, this auto-generated one is not appropriate.
 For example, it generates a tar archive from the git repo. Traditionally, RPMs
 have been built from tarballs, but in our case there is no need for this step
 so we will eliminate it.
 
-## What is the _service file?
+## What is the `_service` file?
 
-The _service file is a blob of XML which will be processed by the OBS to obtain
+The `_service` file is a blob of XML which will be processed by the OBS to obtain
 the source code of our package from github and tweak it so it can be built and
 packaged into an RPM.
 
 In our case, since we will be maintaining the spec file and the changes file in
-the git repo, the _service file is the only file we will need to maintain in OBS.
+the git repo, the `_service` file is the only file we will need to maintain in OBS.
 
 The tedium of having to use two source code repositories (github, OBS) will be
 thereby minimized, and we will gain the advantages of OBS while minimizing our
 interaction with it, since we will empower github itself to trigger our OBS
-builds, and OBS will get everything it needs (except for the _service file
+builds, and OBS will get everything it needs (except for the `_service` file
 itself) from the git repo.
 
-## Populate the _service file
+## Populate the `_service` file
 
-Replace the auto-generated contents of the _service file with the following:
+Replace the auto-generated contents of the `_service` file with the following:
 
     <services>
       <service name="obs_scm">
@@ -199,7 +199,7 @@ Github no longer uses "master" as the default branch name, because the word
 "master" has been associated with slavery. But the obs_scm source service still
 defaults to "master" and might fail if this branch doesn't exist. Therefore,
 it's a good idea to explicitly set the branch that obs_scm will use. In the
-_service file, this is done by the line
+`_service` file, this is done by the line
 
    <param name="revision">main</param>
 
@@ -254,14 +254,14 @@ Simply because the part of OBS that is able to clone github repo and act on its
 contents is implemented as an OBS source service.
 
 When we trigger a build, either locally or on the server, the first thing that
-happens is it "runs" the _service file. This is necessary because running the
-_service file clones the github repo with our package's source code in it.
+happens is it "runs" the `_service` file. This is necessary because running the
+`_service` file clones the github repo with our package's source code in it.
 Crucially, it also extracts the spec file, and without a spec file no build can
 take place.
 
 ## Which OBS source services will we be using?
 
-By "running" the _service file, we mean: running the individual source services
+By "running" the `_service` file, we mean: running the individual source services
 as configured, and in the order in which they appear, in that file. We've already
 looked at this file once before, but it's worth looking at it again:
 
@@ -292,7 +292,7 @@ install it our local build will fail when it tries to run this service.
 At this point you might be tempted to trigger a local build with "oosc build".
 That won't work, though, because there is no spec file yet. But that's not a 
 problem, because the spec file will be downloaded from the git repo when we run
-the obs_scm service. Although it is true that running the _service file is one
+the obs_scm service. Although it is true that running the `_service` file is one
 of the first things that "oosc build" does, it currently refuses to run at all
 if there is no spec file present.
 
@@ -315,7 +315,7 @@ When obs_scm finishes without an error, it creates a bunch of stuff!
 What is all of this? Well, it's the output produced by our run of the obs_scm
 service. The directory "obs_scm_demo" is a local clone of our git repo. This is
 packed up into a cpio archive. Before it is packed up, the changes file and
-spec file are extracted (see the "extract" param lines in our _service file).
+spec file are extracted (see the "extract" param lines in our `_service` file).
 The last file, obsinfo, contains some obs_scm-specific metadata that we don't
 necessarily need to know much about.
 
@@ -331,7 +331,7 @@ Does the local build succeed? Fingers crossed!
 
 In our local package checkout, this clutter will need to be removed at some
 point, because we don't want to commit any of it to the server. The only file
-we are maintaining in the OBS is _service, so we need to take care not to try
+we are maintaining in the OBS is `_service`, so we need to take care not to try
 to commit anything else.
 
     oosc status
@@ -361,7 +361,7 @@ server cleans that one up automatically.
 ## So we're done?
 
 No. We have set up and populated a git repo. We have also set up an OBS package
-with a _service file so the OBS is able to fetch everything it needs from the
+with a `_service` file so the OBS is able to fetch everything it needs from the
 git repo. But we are still triggering builds manually. We want the builds to be
 triggered automatically whenever we push to the git repo on github.
 
@@ -378,7 +378,7 @@ github in order to clone the repo, however, because the repo is public.
 So, on the github side, there will be a webhook which is basically a URL
 (perhaps more fancifully, we could call it an "API endpoint") and the secret
 token which will unlock this API endpoint for us. On the OBS side there is the
-package, containing a _service file, and a service token that will run that
+package, containing a `_service` file, and a service token that will run that
 service file and build the resulting code for all of the configured build
 targets.
 
@@ -472,3 +472,125 @@ Two things should happen. First, you should see another row appear in the
 webhook's "Recent Deliveries" table. Second, you should see a new revision
 appear in the OBS package. The appearance of a new revision should trigger
 a server-side build.
+
+## Are we done yet?
+
+At this point, you should have achieved the goal. You have a github repo
+with software source code, a spec file, and a changes file. You also have
+an OBS package with the same name as the git repo. In this OBS package you have
+a `_service` file containing an obs_scm service "stanza". This `_service` file
+is triggered by a Webhook that we have set up in the git repo. The Webhook calls
+an OBS service token endpoint that we created by running `oosc token --create`.
+
+## What next?
+
+You might have noticed that the RPMs built by the OBS in our package look
+like this:
+
+    obs_scm_demo-1675339511.804eaa2-lp154.19.1.noarch.rpm
+
+The string "1675339511.804eaa2" is the RPM version and "lp154.19.1" is the
+release. The release is set by the OBS at build time and should not be tampered
+with. The version is set by obs_scm and it defaults to `%ct.%h` where `%ct` is
+"Commit time as a UNIX timestamp, e.g. 1384855776" and `%h` stands for
+"Abbreviated hash" (in our case, this is the hash identifying the tip commit in
+the main branch of our git repo at the time when this build was triggered).
+
+## What good is a version that looks like 1675339511.804eaa2"? It seems meaningless!
+
+This default version number format is actually not that bad. As long as you
+simply add commits to the tip of the main branch, the commit time will be
+guaranteed to be an ever-increasing integer. Having the commit hash inside
+the version number is also useful, because you can link any given RPM to the
+commit it was built from.
+
+## But I want to implement a different version number format
+
+OK, let's implement a different version number format. Refer to the source
+code of obs-service-tar_scm:
+
+    [https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in](https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in)
+
+This file describes all the obs_scm parameters. One of them is called
+"versionformat". This describes how the version string is interpreted. As we've
+seen before, the default is `%ct.%h`.
+
+If you want an actual version number like "0.0.1", you have two options: can
+either specify it directly in the `_service` file using the `version` parameter
+(but then you have to edit the `_service` file whenever the version number
+changes), or you can specify the version number as a git tag. The git tag way
+is probably what you want, since that allows you to set the version number in
+git.
+
+## What might a real-life version numbering scheme look like?
+
+Let's say we want to have version numbers like "0.0.1.3+g54cacf2" where the
+first three components (0.0.1) come from a release version tag that will look
+like "v0.0.1", the fourth component is the number of commits that have been
+added to the branch since that tag, and the last component (g54cacf2) is the git
+hash in the format we are used to seeing when we run `git describe` ("g" + the
+abbreviated commit hash). This avoids having a UNIX timestamp in our version
+number, but we still have the git hash in there, and we can implement a release
+workflow and describe our releases in `obs_scm_demo.changes`. In other words,
+the first three version number components will be set manually by adding a tag,
+while the fourth and fifth components will be determined by `obs_scm` at build
+time.
+
+## How to implement this version numbering scheme in obs_scm_demo?
+
+First, add the following two lines to the `osc_scm` service stanza of
+`_service`:
+
+    <param name="versionformat">@PARENT_TAG@+%ct.%h</param>
+    <param name="versionrewrite-pattern">v(.*)</param>
+
+Now, your `_service` file should look like this:
+
+    <services>
+      <service name="obs_scm">
+        <param name="url">https://github.com/smithfarm/obs_scm_demo.git</param>
+        <param name="scm">git</param>
+        <param name="revision">main</param>
+        <param name="extract">obs_scm_demo.spec</param>
+        <param name="extract">obs_scm_demo.changes</param>
+        <param name="versionformat">@PARENT_TAG@.@TAG_OFFSET@+g%h</param>
+        <param name="versionrewrite-pattern">v(.*)</param>
+      </service>
+      <service mode="buildtime" name="set_version"/>
+
+Second, add a tag and push it:
+
+    git tag v0.0.1
+    git push origin v0.0.1
+
+It can be an annotated tag if you like.
+
+Third, "cut a release" by adding a new entry to the changes file:
+
+    oosc vc
+
+The new entry should look something like this:
+
+    -------------------------------------------------------------------
+    Thu Feb  2 12:04:45 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.1
+
+    - Update to version 0.0.1:
+      + first release
+
+Notice that the version number is appended to the end of the first line.
+This is not required, but if you omit it you will get an RPMLINT warning at the
+end of your builds.
+
+Commit and push:
+
+    git commit -am"Release version 0.0.1"
+    git push
+
+Look at the "Recent Deliveries" tab in your github repo (Settings -> Webhooks
+-> Edit -> Recent Deliveries). You should see a new delivery with a green
+checkmark (OBS responded with status 200 OK).
+
+In the OBS web interface, go to your package and wait for it to finish
+building. The binary RPM produced should now look like this:
+
+    obs_scm_demo-0.0.1+1675339511.804eaa2-lp154.19.1.noarch.rpm
