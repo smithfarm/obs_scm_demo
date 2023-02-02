@@ -16,7 +16,7 @@ SCM is an acronym which means Source Code Management.
 OBS_SCM (obs_scm) is an OBS Source Service for automating the process of
 grabbing source code from a Source Code Management service, such as github, for
 the purpose of building it and packaging it.
- 
+
 ## What will we do?
 
 We will bootstrap a software project in github, with automated builds in the
@@ -128,7 +128,7 @@ This will open an editor. Make the changes file look like this:
 
     -------------------------------------------------------------------
     Wed Feb  1 09:59:28 UTC 2023 - Nathan Cutler <ncutler@suse.com>
-    
+
     - Bootstrap
 
 Add, commit
@@ -149,22 +149,22 @@ Next, still in the git clone directory, create a file called
     URL:            https://github.com/smithfarm/obs_scm_demo
     Source0:        _service
     BuildArch:      noarch
-    
+
     %description
     All you ever wanted to know about OBS_SCM, but were afraid to ask.
-    
+
     %prep
     %setup -q -n %_sourcedir/%name-%version -T -D
-    
+
     %build
-    
+
     %install
     install -D -m 0755 obs_scm_demo %{buildroot}%{_bindir}/obs_scm_demo
-    
+
     %files
     %license LICENSE
     %{_bindir}/obs_scm_demo
-    
+
     %changelog
 
 Add, commit
