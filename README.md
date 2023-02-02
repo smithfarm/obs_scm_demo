@@ -584,7 +584,7 @@ end of your builds.
 Commit and push:
 
     git commit -am"Release version 0.0.1"
-    git push origin --tags
+    git push origin
 
 Look at the "Recent Deliveries" tab in your github repo (Settings -> Webhooks
 -> Edit -> Recent Deliveries). You should see a new delivery with a green
@@ -594,3 +594,27 @@ In the OBS web interface, go to your package and wait for it to finish
 building. The binary RPM produced should now look like this:
 
     obs_scm_demo-0.0.1+1675339511.804eaa2-lp154.19.1.noarch.rpm
+
+The reason this works is: we pushed the tag first, and the commit second.
+If we had pushed the commit first and then the tag, the version number would not
+have changed. This is because, even though pushing a tag causes github to
+deliver a webhook to the OBS, OBS only triggers a build when the source code
+changes, and that is not the case when pushing only a tag.
+
+## git push --atomic
+
+In more recent versions of git, and provided the other side supports it (github
+does support it), you can use --atomic to push the commits and the tag at the
+same time, in a single, "atomic" operation.
+
+Make some source change and commit it:
+
+     vim obs_scm_demo
+     git commit -am"obs_scm_demo: some really trivial source code change"
+     oosc vc  # add a new changes file entry for a new version 0.0.2
+     git tag v0.0.2
+     git status
+
+Now, push this new commit and its corresponding tag, atomically:
+
+     git push --atomic origin main v0.0.2
