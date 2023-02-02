@@ -3,7 +3,9 @@
 ## What is this?
 
 This is "learn by doing." Specifically, we will learn about OBS_SCM by
-bootstrapping a software project on github and OBS.
+bootstrapping a software project in github and setting up automated builds in
+the OBS, while maintaining both the spec file and the changes file in git, all
+in the simplest possible way.
 
 ## What is github? What is OBS? What is OBS_SCM?
 
@@ -17,13 +19,7 @@ OBS_SCM (obs_scm) is an OBS Source Service for automating the process of
 grabbing source code from a Source Code Management service, such as github, for
 the purpose of building it and packaging it.
 
-## What will we do?
-
-We will bootstrap a software project in github, with automated builds in the
-OBS, while maintaining both the spec file and the changes file in git, in the
-simplest possible way.
-
-## I don't see any code here! How will this do all that stuff without code?
+## But the script in this repo is trivial. It won't do all that stuff.
 
 The "code" is this file, README.md, and the idea is that the reader will go through
 it and thereby get hands-on experience with `obs_scm`. So, this is not an
@@ -31,12 +27,24 @@ application or software project in the traditional sense. There is no program
 here that will "do" something for you. You have to do the work yourself, but
 this README.md will tell you "how to" do it.
 
-OK? OK. Let's get started.
+We are going to bootstrap a completely new software project for future
+development, not run software that has already been developed.
+
+## But I already know how to bootstrap a new software project!
+
+So do I. But I didn't know how to set it up so that it would build automatically
+(in OBS) whenever I push code to github, and I didn't know how to set it up so
+I could maintain the spec file and the changes file in git. If you already know
+how to do that, then you don't need this
+
+## OK. Let's get started.
+
+OK. Here we go.
 
 ## Review the documentation
 
-Review the OBS Source Services documentation. I recommend to study the whole
-chapter with care.
+Before getting our hands dirty, let's review the OBS Source Services
+documentation. I recommend to study the whole chapter with care.
 
 [Using Source Services chapter of OBS User Guide](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html)
 
