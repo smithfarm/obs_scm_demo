@@ -2,18 +2,20 @@
 
 ## What is this?
 
-This is "learn by doing." Specifically, we will learn about OBS_SCM.
+This is "learn by doing." Specifically, we will learn about OBS_SCM by
+bootstrapping a software project on github and OBS.
 
-## What is OBS_SCM?
+## What is github? What is OBS? What is OBS_SCM?
 
-OBS stands for the Open Build Service.
+[Github](https://github.com) is a source code forge.
 
-SCM stands for Source Code Management
+OBS stands for the [Open Build Service](https://openbuildservice.org).
 
-OBS_SCM is a feature using which we use the OBS in conjunction with a Source
-Code Management service, such as github. The idea is to maintain everything
-(well, almost everything) that OBS needs to build our software in git, and
-not have to worry too much about getting source code changes built in OBS.
+SCM is an acronym which means Source Code Management.
+
+OBS_SCM (obs_scm) is an OBS Source Service for automating the process of
+grabbing source code from a Source Code Management service, such as github, for
+the purpose of building it and packaging it.
  
 ## What will we do?
 
@@ -21,13 +23,29 @@ We will bootstrap a software project in github, with automated builds in the
 OBS, while maintaining both the spec file and the changes file in git, in the
 simplest possible way.
 
-OK, let's get started.
+OK? OK. Let's get started.
 
 ## Review the documentation
 
-Review the OBS source service documentation. Study the whole chapter closely.
+Review the OBS Source Services documentation. I recommend to study the whole
+chapter with care.
 
 [Using Source Services chapter of OBS User Guide](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.source_service.html)
+
+## Global search and replace
+
+Since you are not "smithfarm" and you might want to call your software something
+other than "obs_scm_demo", now would be a good time to globally search for these
+two terms in this document and replace them with terms that make sense for you!
+
+For example, if your github username is "foocity" and your OBS username is also
+"foocity", and you want to call your software package "bar_blaz", you would do:
+
+    sed -i -e 's/smithfarm/foocity/g' README.md
+    sed -i -e 's/obs_scm_demo/bar_blaz/g' README.md
+
+If your github username and your OBS username are different, I'm afraid you'll
+have to replace "smithfarm" with the appropriate string manually.
 
 ## Create an empty git repo
 
