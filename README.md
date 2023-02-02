@@ -23,6 +23,14 @@ We will bootstrap a software project in github, with automated builds in the
 OBS, while maintaining both the spec file and the changes file in git, in the
 simplest possible way.
 
+## I don't see any code here! How will this do all that stuff without code?
+
+The "code" is this file, README.md, and the idea is that the reader will go through
+it and thereby get hands-on experience with `obs_scm`. So, this is not an
+application or software project in the traditional sense. There is no program
+here that will "do" something for you. You have to do the work yourself, but
+this README.md will tell you "how to" do it.
+
 OK? OK. Let's get started.
 
 ## Review the documentation
