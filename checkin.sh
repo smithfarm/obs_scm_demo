@@ -2,7 +2,7 @@
 
 PROJECT="obs_scm_demo"
 REMOTE="origin"
-BRANCH="main"
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 # If your tag looks like "v0.0.3", do nothing.
 # If your tag looks like "cvetool-v0.0.3", set TAG_PREFIX="cvetool-"
 TAG_PREFIX=""
