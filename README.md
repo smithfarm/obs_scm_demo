@@ -37,8 +37,9 @@ future development, not running software that has already been developed.
 So did I went I set out to write this `README.md`. But I didn't know how to set
 up my project so that it would build automatically (in OBS) whenever I push code
 to github, and I didn't know how to set it up so I could maintain the spec file
-and the changes file in git. If you already know how to do that, then it's quite
-possible that you don't need this.
+and the changes file in git. Learning how to do that required effort and I wrote
+this `README.md` in the hopes of making the learning process smoother for
+others.
 
 ## OK, I'm ready. Let's get started.
 
@@ -229,11 +230,11 @@ Maybe we can clarify a few things.
 
 In the github repo, we should have the following files:
 
-   LICENSE  obs_scm_demo  obs_scm_demo.changes  obs_scm_demo.spe
+    LICENSE  obs_scm_demo  obs_scm_demo.changes  obs_scm_demo.spe
 
 In the OBS checkout, we should have just one file:
 
-   _service
+    _service
 
 The "beauty", and indeed the purpose, of this exercise is to demonstrate not
 only how to maintain the source code of your project in git, and how to
@@ -320,19 +321,22 @@ if there is no spec file present.
 Having established that we must run obs_scm explicitly in order to be able to
 trigger a local build, let us do that now.
 
-   oosc service run obs_scm
-   ls
+    oosc service run obs_scm
+    ls
 
 ## Review the stuff obs_scm creates
 
 When obs_scm finishes without an error, it creates a bunch of stuff!
 
-   obs_scm_demo                                              _service:obs_scm:obs_scm_demo.changes
-   _service                                                  _service:obs_scm:obs_scm_demo.obsinfo
-   _service:obs_scm:obs_scm_demo-1675246327.57faa49.obscpio  _service:obs_scm:obs_scm_demo.spec
+    _service
+    _service:obs_scm:obs_scm_demo-1675246327.57faa49.obscpio
+    _service:obs_scm:obs_scm_demo.changes
+    _service:obs_scm:obs_scm_demo.obsinfo
+    _service:obs_scm:obs_scm_demo.spec
+    obs_scm_demo
 
 What is all of this? Well, it's the output produced by our run of the obs_scm
-service. The directory "obs_scm_demo" is a local clone of our git repo. This is
+service. The directory `obs_scm_demo` is a local clone of our git repo. This is
 packed up into a cpio archive. Before it is packed up, the changes file and
 spec file are extracted (see the "extract" param lines in our `_service` file).
 The last file, obsinfo, contains some obs_scm-specific metadata that we don't
@@ -528,7 +532,7 @@ commit it was built from.
 OK, let's implement a different version number format. Refer to the source
 code of obs-service-tar_scm:
 
-    [https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in](https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in)
+[https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in](https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in)
 
 This file describes all the obs_scm parameters. One of them is called
 "versionformat". This describes how the version string is interpreted. As we've
