@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Feb  3 15:15:53 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.1.0
+
+- Update to version 0.1.0:
+  + README.md: cleanup
+  + checkin.in: allow user to optionally specify incremented version number
+  + VERSION: new file containing the version number
+
+-------------------------------------------------------------------
 Fri Feb  3 09:53:32 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.8
 
 - Update to version 0.0.8:
