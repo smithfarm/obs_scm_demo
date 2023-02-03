@@ -1,38 +1,16 @@
 -------------------------------------------------------------------
-Fri Feb  3 09:04:24 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.7
+Fri Feb  3 09:53:32 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.8
 
-- Update to version 0.0.7:
+- Update to version 0.0.8:
   + checkin.sh: script to automate away release cutting tedium
-
--------------------------------------------------------------------
-Fri Feb  3 08:45:58 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.6
-
-- Update to version 0.0.6:
   + README.md: clarify what this is all about, for skeptical developers
 
 -------------------------------------------------------------------
 Thu Feb  2 14:20:34 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.5
 
 - Release version 0.0.5: 
-  + README.md: I don't see any code here! How will this do all that stuff
-    without code?
-
--------------------------------------------------------------------
-Thu Feb  2 14:10:57 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.4
-
-- Release version 0.0.4: 
   + README.md: discuss git push --atomic
-
--------------------------------------------------------------------
-Thu Feb  2 13:58:45 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.3
-
-- Release version 0.0.3: 
   + README.md: push tags along with commits when pushing
-
--------------------------------------------------------------------
-Thu Feb  2 13:46:28 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.2
-
-- Release version 0.0.2:
   + README.md: add lots of verbiage about version numbers
 
 -------------------------------------------------------------------
@@ -40,13 +18,3 @@ Thu Feb  2 12:04:45 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.1
 
 - Release version 0.0.1:
   + first release
-
--------------------------------------------------------------------
-Wed Feb  1 18:05:44 UTC 2023 - Nathan Cutler <ncutler@suse.com>
-
-- add README.md 
-
--------------------------------------------------------------------
-Wed Feb  1 09:59:28 UTC 2023 - Nathan Cutler <ncutler@suse.com>
-
-- Bootstrap
