@@ -61,13 +61,19 @@ echo -n "type in the new version number to use: "
 read -r new_version_number
 if [ "$new_version_number" ] ; then
     INCREMENTED_VERSION="$new_version_number"
+    if [[ $new_version_number =~ ^([0-9]\.)+[0-9] ]] ; then
+        INCREMENTED_VERSION="$new_version_number"
+    else
+        error_exit "You entered ->$new_version_number<- but that does not look like a version number!"
+    fi
 fi
+echo "Will increment the version to $INCREMENTED_VERSION"
 
 TMP_FILE="$(mktemp)"
 set -x
 git --no-pager log --reverse --no-merges --pretty=format:%s "$MOST_RECENT_TAG..HEAD" > "$TMP_FILE"
 set +x
-COMMITS_IN_RELEASE="$(cat $TMP_FILE)"
+COMMITS_IN_RELEASE="$(cat "$TMP_FILE")"
 
 if [ "$COMMITS_IN_RELEASE" ] ; then
     sed -i -e 's/^/  + /' "$TMP_FILE"
@@ -79,7 +85,7 @@ fi
 SAVED_CHANGES="$(mktemp)"
 cp "$PROJECT.changes" "$SAVED_CHANGES"
 osc vc -m"Update to version $INCREMENTED_VERSION:
-$(cat $TMP_FILE)"
+$(cat "$TMP_FILE")"
 sed -i -e "2{s/$/& - $INCREMENTED_VERSION/}" $PROJECT.changes
 vim "$PROJECT.changes"
 
