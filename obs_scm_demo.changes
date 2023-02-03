@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  3 16:06:31 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.1.2
+
+- Update to version 0.1.2:
+  + checkin.sh: use the current branch instead of some hard-coded one
+
+-------------------------------------------------------------------
 Fri Feb  3 16:04:59 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.1.1
 
 - Update to version 0.1.1:
