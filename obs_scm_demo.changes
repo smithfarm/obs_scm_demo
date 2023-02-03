@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  3 09:04:24 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.7
+
+- Update to version 0.0.7:
+  + checkin.sh: script to automate away release cutting tedium
+
+-------------------------------------------------------------------
 Fri Feb  3 08:45:58 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.0.6
 
 - Update to version 0.0.6:
