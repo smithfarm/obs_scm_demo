@@ -21,23 +21,26 @@ the purpose of building it and packaging it.
 
 ## But the script in this repo is trivial. It won't do all that stuff.
 
-The "code" is this file, README.md, and the idea is that the reader will go through
-it and thereby get hands-on experience with `obs_scm`. So, this is not an
-application or software project in the traditional sense. There is no program
-here that will "do" something for you. You have to do the work yourself, but
-this README.md will tell you "how to" do it.
+This (`obs_scm_demo`) is not an application or software project in the
+traditional sense. There is no program here that will "do" something for you.
+You have to do the work yourself, but this README.md will tell you "how to" do
+it.
 
-We are going to bootstrap a completely new software project for future
-development, not run software that has already been developed.
+The idea here is that the reader of `README.md` will try to do what is described
+and, along the way, obtain hands-on experience with `obs_scm`.
+
+If you do that, you will be bootstrapping a completely new software project for
+future development, not running software that has already been developed.
 
 ## But I already know how to bootstrap a new software project!
 
-So do I. But I didn't know how to set it up so that it would build automatically
-(in OBS) whenever I push code to github, and I didn't know how to set it up so
-I could maintain the spec file and the changes file in git. If you already know
-how to do that, then you don't need this
+So did I went I set out to write this `README.md`. But I didn't know how to set
+up my project so that it would build automatically (in OBS) whenever I push code
+to github, and I didn't know how to set it up so I could maintain the spec file
+and the changes file in git. If you already know how to do that, then it's quite
+possible that you don't need this.
 
-## OK. Let's get started.
+## OK, I'm ready. Let's get started.
 
 OK. Here we go.
 
@@ -50,7 +53,7 @@ documentation. I recommend to study the whole chapter with care.
 
 ## Global search and replace
 
-Since you are not "smithfarm" and you might want to call your software something
+If you are not "smithfarm" and you want to call your software project something
 other than "obs_scm_demo", now would be a good time to globally search for these
 two terms in this document and replace them with terms that make sense for you!
 
