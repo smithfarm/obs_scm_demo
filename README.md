@@ -634,3 +634,21 @@ Make some source change and commit it:
 Now, push this new commit and its corresponding tag, atomically:
 
      git push --atomic origin main v0.0.2
+
+## OK. I want to cut a release. What are the steps?
+
+1. add commits to main branch locally
+2. determine the existing version (e.g. 0.0.2)
+3. determine the new version (e.g. 0.0.3, 0.1.0, etc.)
+4. add changes file entry ("osc vc")
+5. commit the change file ("git commit -a -s -m"bump to 0.0.3")
+6. add version tag ("git tag v0.0.3")
+7. atomic push ("git push --atomic origin main v0.0.3")
+
+## How to automate the release steps?
+
+Wow, seven finicky steps which I will need to repeat for every release, without
+making any mistake. Tedious! Is there any way to automate that?
+
+Yes, these steps can of course be automated. A bash script, `checkin.sh` is
+included in this repo which might give you some ideas in that direction!
