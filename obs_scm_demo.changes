@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  3 16:04:59 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.1.1
+
+- Update to version 0.1.1:
+  + checkin.sh: vet user-supplied version number
+
+-------------------------------------------------------------------
 Fri Feb  3 15:15:53 UTC 2023 - Nathan Cutler <ncutler@suse.com> - 0.1.0
 
 - Update to version 0.1.0:
