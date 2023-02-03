@@ -1,8 +1,11 @@
 #!/bin/bash
 
-PROJECT=obs_scm_demo
-REMOTE=origin
-BRANCH=main
+PROJECT="obs_scm_demo"
+REMOTE="origin"
+BRANCH="main"
+# If your tag looks like "v0.0.3", do nothing.
+# If your tag looks like "cvetool-v0.0.3", set TAG_PREFIX="cvetool-"
+TAG_PREFIX=""
 
 # credit: https://stackoverflow.com/questions/369758/how-to-trim-whitespace-from-a-bash-variable
 function __trim {
@@ -41,8 +44,10 @@ function error_exit {
     exit 1
 }
 
-MOST_RECENT_TAG="$(echo "$(git describe --tags --long --match 'v*')" | cut -d- -f1)"
-VERSION="${MOST_RECENT_TAG#v}"
+MOST_RECENT_TAG="$(git describe --tags --abbrev=0 --match "${TAG_PREFIX}v*")"
+# if TAG_PREFIX includes "-" character, the cut options will need to be tweaked!
+MOST_RECENT_TAG_CLIPPED="$(echo "$MOST_RECENT_TAG" | cut -d- -f1)"
+VERSION="${MOST_RECENT_TAG_CLIPPED#v}"
 
 echo "The current version number appears to be ->$VERSION<-"
 does_that_look_sane
@@ -51,11 +56,17 @@ IFS=. read -r MAJOR MINOR POINT <<< "$VERSION"
 POINT="$((POINT + 1))"
 INCREMENTED_VERSION="${MAJOR}.${MINOR}.${POINT}"
 
-echo "The version number will be incremented to ->$INCREMENTED_VERSION<-"
-does_that_look_sane
+echo "Hit ENTER to increment the version number to ->$INCREMENTED_VERSION<- or"
+echo -n "type in the new version number to use: "
+read -r new_version_number
+if [ "$new_version_number" ] ; then
+    INCREMENTED_VERSION="$new_version_number"
+fi
 
 TMP_FILE="$(mktemp)"
-git --no-pager log --reverse --pretty=format:%s "$MOST_RECENT_TAG..HEAD" > "$TMP_FILE"
+set -x
+git --no-pager log --reverse --no-merges --pretty=format:%s "$MOST_RECENT_TAG..HEAD" > "$TMP_FILE"
+set +x
 COMMITS_IN_RELEASE="$(cat $TMP_FILE)"
 
 if [ "$COMMITS_IN_RELEASE" ] ; then
@@ -94,7 +105,8 @@ done
 
 echo "Releasing version $INCREMENTED_VERSION !!!"
 set -x
+echo "$INCREMENTED_VERSION" > VERSION
 git commit -a -s -m"Bump to version $INCREMENTED_VERSION"
-git tag "v$INCREMENTED_VERSION"
-git push --atomic "$REMOTE" "$BRANCH" "v$INCREMENTED_VERSION"
+git tag "${TAG_PREFIX}v$INCREMENTED_VERSION"
+git push --atomic "$REMOTE" "$BRANCH" "${TAG_PREFIX}v$INCREMENTED_VERSION"
 set +x
