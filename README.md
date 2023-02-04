@@ -104,7 +104,8 @@ Observe that a `_service` file has been created
 While we will need a `_service` file, this auto-generated one is not appropriate.
 For example, it generates a tar archive from the git repo. Traditionally, RPMs
 have been built from tarballs, but in our case there is no need for this step
-so we will eliminate it.
+so we will eliminate it using a spec file trick that will be explained later,
+when we introduce the spec file.
 
 ## What is the `_service` file?
 
@@ -187,6 +188,22 @@ Next, still in the git clone directory, create a file called
     %{_bindir}/obs_scm_demo
 
     %changelog
+
+This spec file is interesting because there is no tarball. I can't explain
+exactly how it works, but I do know that the "magic" is in the line
+
+    %setup -q -n %_sourcedir/%name-%version -T -D
+
+In a classic RPM build, the %setup macro expects to find a source code tarball
+which it unpacks so the build can take place. In our case, the `obs_scm` source
+service clones a git repo containing the source code, and there is no tarball.
+The "-D" option disables deleting of the source code directory and the "-T"
+option disables unpacking of the source code tarball.
+
+For more information, see [the RPM Packaging
+Guide](https://rpm-packaging-guide.github.io/#setup) and [How to integrate
+external SCM
+sources](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.best-practices.scm_integration.html)
 
 Add, commit
 
