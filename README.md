@@ -2,12 +2,12 @@
 
 ## What is this?
 
-This is "learn by doing." Specifically, we will learn about OBS_SCM by
+This is "learn by doing." Specifically, we will learn about `obs_scm` by
 bootstrapping a software project in github and setting up automated builds in
 the OBS, while maintaining both the spec file and the changes file in git, all
 in the simplest possible way.
 
-## What is github? What is OBS? What is OBS_SCM?
+## What is github? What is the OBS? What is obs_scm?
 
 [Github](https://github.com) is a source code forge.
 
@@ -15,7 +15,7 @@ OBS stands for the [Open Build Service](https://openbuildservice.org).
 
 SCM is an acronym which means Source Code Management.
 
-OBS_SCM (obs_scm) is an OBS Source Service for automating the process of
+`obs_scm` is an OBS Source Service for automating the process of
 grabbing source code from a Source Code Management service, such as github, for
 the purpose of building it and packaging it.
 
@@ -34,12 +34,26 @@ future development, not running software that has already been developed.
 
 ## But I already know how to bootstrap a new software project!
 
-So did I went I set out to write this `README.md`. But I didn't know how to set
-up my project so that it would build automatically (in OBS) whenever I push code
-to github, and I didn't know how to set it up so I could maintain the spec file
-and the changes file in git. Learning how to do that required effort and I wrote
-this `README.md` in the hopes of making the learning process smoother for
-others.
+When I set out to write this `README.md`, I realized that, while I did know in
+general how to bootstrap a new software project, there were some pain points I
+did not know how to avoid. First, I didn't know how to set up my project so that
+builds in OBS would be triggered automatically whenever I push code to github.
+For that to be successful, OBS would need to grab the spec file and the changes
+file from the git repo as well, and it wasn't clear to me how to arrange that.
+Finally, OBS needs to be able to automatically determine the current version
+number from the state of the git repo. In all my previous projects, I was doing
+some or all of these things manually using `osc` commands, and there didn't seem
+to be any way to fully automate these steps.
+
+(Please note: this is not about fully automating the process of editing the
+changes file. It has never been my attention to "automate away" this file or
+somehow rid myself of my responsibility, as the maintainer of a package that is
+carried in openSUSE, to add appropriate changes file entries whenever I change
+the package. What I *did* want to achieve, though, was to maintain the changes
+file in git.)
+
+Learning how to do all of the above required effort and I wrote this `README.md`
+in the hopes of making the learning process smoother for others.
 
 ## OK, I'm ready. Let's get started.
 
@@ -216,7 +230,7 @@ Our software project needs some source code. Create a file called
 "obs_scm_demo" with the following contents:
 
     #!/bin/sh
-    echo "Hello, OBS_SCM!"
+    echo "Hello, obs_scm!"
 
 Add, commit
 
@@ -276,10 +290,10 @@ push something to the main branch in github.
 
 ## What about PRs?
 
-With OBS_SCM workflows, Github actions, and possibly other (relatively
-complicated) stuff, it might be possible to build CI pipelines, automatically
-trigger builds of WIP branches, show the build results in github's PR
-interface, etc. We won't be doing any of that here.
+With OBS workflows, Github actions, and possibly other (relatively complicated)
+stuff, it might be possible to build CI pipelines, automatically trigger builds
+of WIP branches, show the build results in github's PR interface, etc. We won't
+be doing any of that here.
 
 What we will be doing is to set up our project so that every push to the main
 branch in github causes a webhook to fire, and this webhook will trigger a new
@@ -313,7 +327,7 @@ looked at this file once before, but it's worth looking at it again:
   <service mode="buildtime" name="set_version"/>
 </services>
 
-The first service mentioned is "obs_scm". This source service is packaged as
+The first service mentioned is `obs_scm`. This source service is packaged as
 obs-service-obs_scm and since we will need it for local builds, let us install
 that on our local system now:
 
@@ -329,9 +343,9 @@ install it our local build will fail when it tries to run this service.
 At this point you might be tempted to trigger a local build with "oosc build".
 That won't work, though, because there is no spec file yet. But that's not a 
 problem, because the spec file will be downloaded from the git repo when we run
-the obs_scm service. Although it is true that running the `_service` file is one
-of the first things that "oosc build" does, it currently refuses to run at all
-if there is no spec file present.
+the `obs_scm` service. Although it is true that running the `_service` file is
+one of the first things that "oosc build" does, it currently refuses to run at
+all if there is no spec file present.
 
 ## Run the obs_scm source service locally
 
@@ -343,7 +357,7 @@ trigger a local build, let us do that now.
 
 ## Review the stuff obs_scm creates
 
-When obs_scm finishes without an error, it creates a bunch of stuff!
+When `obs_scm` finishes without an error, it creates a bunch of stuff!
 
     _service
     _service:obs_scm:obs_scm_demo-1675246327.57faa49.obscpio
@@ -439,7 +453,7 @@ Create an OBS service token linked to our project/package:
 ## Save the OBS service token in a safe place
 
 This will return a small blob of XML. Save the above command and the XML it
-returned in your password manager under, e.g., "SUSE/OBS_SCM".
+returned in your password manager under, e.g., "SUSE/obs_scm".
 
 The XML blob will look something like this:
 
@@ -518,7 +532,7 @@ a server-side build.
 At this point, you should have achieved the goal. You have a github repo
 with software source code, a spec file, and a changes file. You also have
 an OBS package with the same name as the git repo. In this OBS package you have
-a `_service` file containing an obs_scm service "stanza". This `_service` file
+a `_service` file containing an `obs_scm` service "stanza". This `_service` file
 is triggered by a Webhook that we have set up in the git repo. The Webhook calls
 an OBS service token endpoint that we created by running `oosc token --create`.
 
@@ -531,7 +545,7 @@ like this:
 
 The string "1675339511.804eaa2" is the RPM version and "lp154.19.1" is the
 release. The release is set by the OBS at build time and should not be tampered
-with. The version is set by obs_scm and it defaults to `%ct.%h` where `%ct` is
+with. The version is set by `obs_scm` and it defaults to `%ct.%h` where `%ct` is
 "Commit time as a UNIX timestamp, e.g. 1384855776" and `%h` stands for
 "Abbreviated hash" (in our case, this is the hash identifying the tip commit in
 the main branch of our git repo at the time when this build was triggered).
@@ -551,7 +565,7 @@ code of obs-service-tar_scm:
 
 [https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in](https://github.com/openSUSE/obs-service-tar_scm/blob/master/tar_scm.service.in)
 
-This file describes all the obs_scm parameters. One of them is called
+This file describes all the `obs_scm` parameters. One of them is called
 "versionformat". This describes how the version string is interpreted. As we've
 seen before, the default is `%ct.%h`.
 
