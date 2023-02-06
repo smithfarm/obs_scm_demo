@@ -46,11 +46,12 @@ some or all of these things manually using `osc` commands, and there didn't seem
 to be any way to fully automate these steps.
 
 (Please note: this is not about fully automating the process of editing the
-changes file. It has never been my attention to "automate away" this file or
+changes file. It has never been my intention to "automate away" this file or
 somehow rid myself of my responsibility, as the maintainer of a package that is
-carried in openSUSE, to add appropriate changes file entries whenever I change
-the package. What I *did* want to achieve, though, was to maintain the changes
-file in git.)
+carried in openSUSE, to add appropriate entries to the changes file whenever
+I change the package. What I *did* want to achieve, though, was to maintain the
+changes file in git, and fully automate the process of updating the file in
+OBS.)
 
 Learning how to do all of the above required effort and I wrote this `README.md`
 in the hopes of making the learning process smoother for others.
