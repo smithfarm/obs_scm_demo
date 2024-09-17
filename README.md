@@ -253,7 +253,7 @@ defaults to "master" and might fail if this branch doesn't exist. Therefore,
 it's a good idea to explicitly set the branch that obs_scm will use. In the
 `_service` file, this is done by the line
 
-   <param name="revision">main</param>
+    <param name="revision">main</param>
 
 ## Step back, relax
 
