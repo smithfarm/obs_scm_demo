@@ -281,7 +281,7 @@ Maybe we can clarify a few things.
 
 In the github repo, we should have the following files:
 
-    LICENSE  obs_scm_demo  obs_scm_demo.changes  obs_scm_demo.spe
+    LICENSE  obs_scm_demo  obs_scm_demo.changes  obs_scm_demo.spec
 
 In the OBS checkout, we should have just one file:
 
