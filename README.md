@@ -88,6 +88,25 @@ Using the github web GUI, create an empty github repo.
 
 [URL of your empty github repo](https://github.com/smithfarm/obs_scm_demo)
 
+## Optionally create an osc alias
+
+In this HOWTO, we will be using the openSUSE Build Service via its API
+endpoint, api.opensuse.org. Normally, the way one would do this is to
+start all osc commands like so:
+
+    osc -A https://api.opensuse.org
+
+But we can be clever and create a shell alias like so:
+
+    alias oosc="osc -A https://api.opensuse.org"
+
+Then, instead of typing `osc -A https://api.opensuse.org`, which can get
+tedious the nth time we do so, we can type just `oosc`.
+
+If you prefer to rely on a default, or use a different alias, or just type out
+the whole thing every time, please keep that in mind whenever you see `oosc`
+in the text below.
+
 ## Create a corresponding empty OBS package
 
 Using the osc command-line client, create an empty OBS package
